@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] SpriteRenderer hp_bar;
     [SerializeField] public Transform shadow;
+    [SerializeField] public GameObject bullet;
 
     DinkleBrain brain;
 
@@ -55,6 +56,21 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(new Vector2(rb.velocity.x, jump_power));
     }
 
+    public void Shoot(float angle)
+    {
+        // Calculate the direction vector from the firing object
+        Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+
+        // Spawn the prefab 1 unit away from the firing object
+        Vector3 spawnPos = transform.position + new Vector3(direction.x, direction.y, 0f);
+        GameObject newPrefab = Instantiate(bullet, spawnPos, Quaternion.identity);
+        Destroy(newPrefab, 1.3f);
+
+        // Set the velocity of the prefab to fire off in the specified direction at speed 40
+        Rigidbody2D prefabRigidbody = newPrefab.GetComponent<Rigidbody2D>();
+        prefabRigidbody.velocity = direction * 40f;
+    }
+
     public void DealDamageToPlayer(float damage)
     {
         hp = Mathf.Clamp(hp - damage, 0.0f, 1.0f);
@@ -88,6 +104,11 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             on_ground = false;
+        }
+
+        if (collision.gameObject.CompareTag("Bomb"))
+        {
+            DealDamageToPlayer(100.0f);
         }
     }
 

@@ -1208,6 +1208,7 @@ MonoBehaviour:
   dink: {fileID: 2031456269}
   leftEye: {fileID: 695609462}
   rightEye: {fileID: 1754049489}
+  bombPrefab: {fileID: 1266320300210881376, guid: ad8bcb0212c569b4d9e557aa3790e2cd, type: 3}
 --- !u!1 &1304089960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1758,6 +1759,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp_bar: {fileID: 711665055}
   shadow: {fileID: 1908491329}
+  bullet: {fileID: 1979367401696542798, guid: a251ebcf3acde1f44997d09961dfd51a, type: 3}
   on_ground: 0
 --- !u!114 &2031456270
 MonoBehaviour:
